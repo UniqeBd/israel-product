@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>বাংলাদেশী বিকল্প - ইসরাইলী পণ্য বর্জন করুন</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/quagga/dist/quagga.min.js"></script>
+    <style>
+        :root {
+            --primary: #006a4e; /* Bangladesh green */
+            --secondary: #f42a41; /* Bangladesh red */
+            --accent: #ff9933;
+            --light: #f5f5f5;
+            --dark: #333;
+        }
+
+        body {
+            font-family: 'Hind Siliguri', 'SolaimanLipi', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light);
+            color: var(--dark);
+            direction: ltr;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .scanner-section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+
+        #scanner-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        #camera-feed {
+            width: 100%;
+            border-radius: 8px;
+            border: 3px solid var(--accent);
+        }
+
+        #scanner-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 2px dashed var(--primary);
+            box-sizing: border-box;
+        }
+
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 10px;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary);
+        }
+
+        .scan-result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+        }
+
+        .product-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 3rem 0;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            background: #f5f5f5;
+            padding: 10px;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-image:hover {
+            transform: scale(1.05);
+        }
+
+        .product-image:before {
+            content: "Image not available";
+            display: none;
+            text-align: center;
+            line-height: 200px;
+            color: #666;
+            background: #f5f5f5;
+        }
+
+        .product-image[src=""]:before,
+        .product-image[src*="undefined"]:before,
+        .product-image[src*="null"]:before {
+            display: block;
+        }
+
+        .product-image[src=""],
+        .product-image[src*="undefined"],
+        .product-image[src*="null"] {
+            background: #f5f5f5;
+        }
+
+        .product-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .product-content {
+            padding: 20px;
+        }
+
+        .badge {
+            background-color: var(--primary);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .alternative-badge {
+            background-color: #27ae60;
+        }
+
+        .israeli-badge {
+            background-color: var(--secondary);
+        }
+
+        .submission-form {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 3rem 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        textarea {
+            min-height: 100px;
+        }
+
+        footer {
+            background-color: var(--secondary);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        .search-bar {
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        #search-input {
+            padding: 12px 20px;
+            width: 100%;
+            max-width: 600px;
+            border: 2px solid var(--accent);
+        }
+
+        .section-title {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background-color: var(--primary);
+        }
+
+        .tabs {
+            display: flex;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #ddd;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            padding: 12px 24px;
+            cursor: pointer;
+            font-weight: bold;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab.active {
+            border-bottom: 3px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .bangla-text {
+            font-family: 'SolaimanLipi', 'Hind Siliguri', Arial;
+        }
+
+        .image-upload-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .image-upload-box {
+            flex: 1;
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .image-upload-box:hover {
+            border-color: var(--primary);
+        }
+
+        .image-preview {
+            max-width: 100%;
+            max-height: 150px;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .barcode-result {
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+            text-align: left;
+        }
+
+        @media (max-width: 768px) {
+            .product-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .tabs {
+                justify-content: center;
+            }
+            
+            .tab {
+                padding: 8px 16px;
+            }
+
+            .image-upload-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo bangla-text">
+                <i class="fas fa-hand-holding-heart"></i> বাংলাদেশী বিকল্প / Bangladeshi Alternatives
+            </div>
+            <div class="tagline bangla-text">
+                ইসরাইলী পণ্য বর্জন করুন, স্থানীয় বিকল্প বেছে নিন / Boycott Israeli Products, Choose Local Alternatives
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="scanner-section">
+            <h2 class="section-title bangla-text">পণ্য স্ক্যানার / Product Scanner</h2>
+            <p class="bangla-text">পণ্যের বারকোড স্ক্যান করে দেখুন এটি ইসরাইলী কিনা (ইসরাইলী বারকোড: 729 বা 871 দিয়ে শুরু) / Scan product barcode to check if it's Israeli (Israeli barcodes start with 729 or 871)</p>
+            
+            <div id="scanner-container">
+                <video id="camera-feed" autoplay playsinline></video>
+                <div id="scanner-overlay"></div>
+            </div>
+            
+            <div>
+                <button class="btn bangla-text" onclick="startScanner()">
+                    <i class="fas fa-camera"></i> স্ক্যানার চালু করুন / Start Scanner
+                </button>
+                <button class="btn btn-secondary bangla-text" onclick="stopScanner()">
+                    <i class="fas fa-stop"></i> স্ক্যানার বন্ধ করুন / Stop Scanner
+                </button>
+            </div>
+            
+            <div class="barcode-result" id="barcode-result">
+                <p class="bangla-text">স্ক্যানার চালু করা হয়নি। স্ক্যান শুরু করতে "স্ক্যানার চালু করুন" বাটনে ক্লিক করুন। / Scanner is not active. Click "Start Scanner" to begin scanning.</p>
+            </div>
+        </section>
+
+        <div class="search-bar">
+            <input type="text" id="search-input" placeholder="পণ্য বা কোম্পানি খুঁজুন... / Search products or companies..." class="bangla-text">
+        </div>
+
+        <div class="tabs">
+            <div class="tab active bangla-text" onclick="filterProducts('all')">সকল পণ্য / All Products</div>
+            <div class="tab bangla-text" onclick="filterProducts('food')">খাদ্য ও পানীয় / Food & Beverage</div>
+            <div class="tab bangla-text" onclick="filterProducts('tech')">প্রযুক্তি / Technology</div>
+            <div class="tab bangla-text" onclick="filterProducts('beauty')">সৌন্দর্য পণ্য / Beauty Products</div>
+            <div class="tab bangla-text" onclick="filterProducts('fashion')">ফ্যাশন / Fashion</div>
+            <div class="tab bangla-text" onclick="filterProducts('health')">স্বাস্থ্য ও ঔষধ / Health & Medicine</div>
+            <div class="tab bangla-text" onclick="filterProducts('other')">অন্যান্য / Other</div>
+        </div>
+
+        <section>
+            <h2 class="section-title bangla-text">বর্জনীয় পণ্যের তালিকা / List of Boycotted Products</h2>
+            <div class="product-list" id="boycott-list"></div>
+        </section>
+
+        <section class="submission-form">
+            <h2 class="section-title bangla-text">নতুন পণ্য যোগ করুন / Add New Product</h2>
+            <form id="product-form">
+                <div class="form-group">
+                    <label class="bangla-text">পণ্য/কোম্পানির নাম / Product/Company Name:</label>
+                    <input type="text" id="product-name" required class="bangla-text">
+                </div>
+                <div class="form-group">
+                    <label class="bangla-text">বিভাগ / Category:</label>
+                    <select id="product-category" required class="bangla-text">
+                        <option value="">বিভাগ নির্বাচন করুন / Select Category</option>
+                        <option value="food">খাদ্য ও পানীয় / Food & Beverage</option>
+                        <option value="tech">প্রযুক্তি / Technology</option>
+                        <option value="beauty">সৌন্দর্য পণ্য / Beauty Products</option>
+                        <option value="fashion">ফ্যাশন / Fashion</option>
+                        <option value="health">স্বাস্থ্য ও ঔষধ / Health & Medicine</option>
+                        <option value="other">অন্যান্য / Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="bangla-text">ইসরাইলী পণ্যের ছবি / Israeli Product Image:</label>
+                    <div class="image-upload-container">
+                        <div class="image-upload-box" onclick="document.getElementById('israeli-file').click()">
+                            <i class="fas fa-upload fa-2x"></i>
+                            <p class="bangla-text">ফাইল আপলোড করুন / Upload File</p>
+                            <input type="file" id="israeli-file" accept="image/*" style="display:none" onchange="previewImage(this, 'israeli-preview')">
+                            <img id="israeli-preview" class="image-preview">
+                        </div>
+                        <div class="image-upload-box">
+                            <i class="fas fa-link fa-2x"></i>
+                            <p class="bangla-text">অথবা ইমেজ URL দিন / Or Enter Image URL</p>
+                            <input type="url" id="israeli-image-url" placeholder="https://example.com/image.jpg">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="bangla-text">বারকোড নম্বর (যদি থাকে) / Barcode Number (if available):</label>
+                    <input type="text" id="barcode-number" placeholder="729... বা 871... / 729... or 871..." class="bangla-text">
+                </div>
+
+                <div class="form-group">
+                    <label class="bangla-text">বর্জনের কারণ / Reason for Boycott:</label>
+                    <textarea id="boycott-reason" required class="bangla-text"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="bangla-text">বাংলাদেশী বিকল্পের নাম / Bangladeshi Alternative Name:</label>
+                    <input type="text" id="alternative-name" required class="bangla-text">
+                </div>
+
+                <div class="form-group">
+                    <label class="bangla-text">বাংলাদেশী বিকল্পের ছবি / Bangladeshi Alternative Image:</label>
+                    <div class="image-upload-container">
+                        <div class="image-upload-box" onclick="document.getElementById('alternative-file').click()">
+                            <i class="fas fa-upload fa-2x"></i>
+                            <p class="bangla-text">ফাইল আপলোড করুন / Upload File</p>
+                            <input type="file" id="alternative-file" accept="image/*" style="display:none" onchange="previewImage(this, 'alternative-preview')">
+                            <img id="alternative-preview" class="image-preview">
+                        </div>
+                        <div class="image-upload-box">
+                            <i class="fas fa-link fa-2x"></i>
+                            <p class="bangla-text">অথবা ইমেজ URL দিন / Or Enter Image URL</p>
+                            <input type="url" id="alternative-image-url" placeholder="https://example.com/image.jpg">
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn bangla-text">
+                    <i class="fas fa-paper-plane"></i> জমা দিন / Submit
+                </button>
+            </form>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p class="bangla-text">বাংলাদেশী বিকল্প &copy; ২০২৩ | ফিলিস্তিনের সাথে সংহতি / Bangladeshi Alternatives &copy; 2023 | Solidarity with Palestine</p>
+        </div>
+    </footer>
+
+    <script>
+        // Enhanced product database with all categories
+        let products = [
+            // Drugs, Health, Medicine & Food Products
+            {
+                name: "Teva Pharmaceuticals",
+                name_bn: "টেভা ফার্মাসিউটিক্যালস",
+                image: "https://www.teva.com/wp-content/uploads/2021/09/teva-logo.svg",
+                category: "health",
+                barcode: "729",
+                reason: "বিশ্বের বৃহত্তম জেনেরিক ওষুধ প্রস্তুতকারক কোম্পানি, ইসরাইল ভিত্তিক",
+                reason_en: "World's largest generic drug manufacturer, based in Israel",
+                alternative: {
+                    name: "স্কয়ার ফার্মাসিউটিক্যালস",
+                    name_en: "Square Pharmaceuticals",
+                    image: "https://www.squarepharma.com.bd/images/logo.png"
+                }
+            },
+            {
+                name: "Super-Pharm",
+                name_bn: "সুপার-ফার্ম",
+                image: "https://www.super-pharm.co.il/wp-content/uploads/2019/07/super-pharm-logo.png",
+                category: "health",
+                barcode: "729",
+                reason: "ইসরাইলী ফার্মেসী চেইন",
+                reason_en: "Israeli pharmacy chain",
+                alternative: {
+                    name: "স্থানীয় ফার্মেসী",
+                    name_en: "Local Pharmacy",
+                    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Pharmacy_symbol.svg/1200px-Pharmacy_symbol.svg.png"
+                }
+            },
+
+            // Clothing & Fashion Accessories
+            {
+                name: "Source Sandals",
+                name_bn: "সোর্স স্যান্ডেলস",
+                image: "https://www.sourcesandals.com/wp-content/uploads/2019/07/source-logo.png",
+                category: "fashion",
+                barcode: "729",
+                reason: "ইসরাইলী স্যান্ডেল ও হাইকিং জুতো কোম্পানি",
+                reason_en: "Israeli sandals and hiking shoes company",
+                alternative: {
+                    name: "বাংলাদেশী জুতো ব্র্যান্ড",
+                    name_en: "Bangladeshi Shoe Brands",
+                    image: "https://www.bata.com.bd/wp-content/uploads/2019/07/bata-logo.png"
+                }
+            },
+            {
+                name: "Castro",
+                name_bn: "কাস্ত্রো",
+                image: "https://www.castro.com/wp-content/uploads/2019/07/castro-logo.png",
+                category: "fashion",
+                barcode: "729",
+                reason: "ইসরাইলী ফ্যাশন ব্র্যান্ড",
+                reason_en: "Israeli fashion brand",
+                alternative: {
+                    name: "আড়ং বা অন্যান্য স্থানীয় ব্র্যান্ড",
+                    name_en: "Aarong or other local brands",
+                    image: "https://www.aarong.com/wp-content/uploads/2019/07/aarong-logo.png"
+                }
+            },
+
+            // Food & Dairy Products
+            {
+                name: "Strauss Group",
+                name_bn: "স্ট্রস গ্রুপ",
+                image: "https://www.strauss-group.com/wp-content/uploads/2019/07/strauss-logo.png",
+                category: "food",
+                barcode: "729",
+                reason: "ইসরাইলী খাদ্য ও পানীয় কোম্পানি",
+                reason_en: "Israeli food and beverage company",
+                alternative: {
+                    name: "প্রাণ ফুডস",
+                    name_en: "PRAN Foods",
+                    image: "https://www.pranfoods.net/wp-content/uploads/2019/07/pran-logo.png"
+                }
+            },
+            {
+                name: "Tnuva Dairy",
+                name_bn: "টনুভা ডেইরি",
+                image: "https://www.tnuva.co.il/wp-content/uploads/2019/07/tnuva-logo.png",
+                category: "food",
+                barcode: "729",
+                reason: "ইসরাইলী ডেইরি পণ্য",
+                reason_en: "Israeli dairy products",
+                alternative: {
+                    name: "মিল্ক ভিটা",
+                    name_en: "Milk Vita",
+                    image: "https://www.milkvita.org/wp-content/uploads/2019/07/milkvita-logo.png"
+                }
+            },
+            {
+                name: "Osem Foods",
+                name_bn: "ওসেম ফুডস",
+                image: "https://www.osem.co.il/wp-content/uploads/2019/07/osem-logo.png",
+                category: "food",
+                barcode: "729",
+                reason: "ইসরাইলী খাদ্য প্রস্তুতকারক",
+                reason_en: "Israeli food manufacturer",
+                alternative: {
+                    name: "আকিজ ফুড",
+                    name_en: "Akij Food",
+                    image: "https://www.akijfood.com/wp-content/uploads/2019/07/akij-logo.png"
+                }
+            },
+            {
+                name: "Wissotzky Tea",
+                name_bn: "উইসোটস্কি চা",
+                image: "https://www.wissotzky.com/wp-content/uploads/2019/07/wissotzky-logo.png",
+                category: "food",
+                barcode: "729",
+                reason: "ইসরাইলী চা কোম্পানি",
+                reason_en: "Israeli tea company",
+                alternative: {
+                    name: "ইপ্পসি চা বা স্থানীয় চা",
+                    name_en: "IPPSI Tea or local tea",
+                    image: "https://www.ippsi.com/wp-content/uploads/2019/07/ippsi-logo.png"
+                }
+            },
+            {
+                name: "Bamba Snack",
+                name_bn: "বাম্বা স্ন্যাক",
+                image: "https://www.bamba.co.il/wp-content/uploads/2019/07/bamba-logo.png",
+                category: "food",
+                barcode: "729",
+                reason: "ইসরাইলী স্ন্যাকস",
+                reason_en: "Israeli snacks",
+                alternative: {
+                    name: "প্রাণ বা অন্যান্য স্থানীয় স্ন্যাকস",
+                    name_en: "PRAN or other local snacks",
+                    image: "https://www.pranfoods.net/wp-content/uploads/2019/07/pran-logo.png"
+                }
+            },
+
+            // Technology
+            {
+                name: "Mobileye (Intel)",
+                name_bn: "মোবাইলআই (ইন্টেল)",
+                image: "https://www.mobileye.com/wp-content/uploads/2019/07/mobileye-logo.png",
+                category: "tech",
+                barcode: "729",
+                reason: "ইসরাইলী স্বয়ংক্রিয় গাড়ি প্রযুক্তি কোম্পানি",
+                reason_en: "Israeli autonomous vehicle technology company",
+                alternative: {
+                    name: "স্থানীয় প্রযুক্তি সমাধান",
+                    name_en: "Local technology solutions",
+                    image: "https://www.bangladesh.gov.bd/wp-content/uploads/2019/07/gov-logo.png"
+                }
+            },
+            {
+                name: "Wix Website Builder",
+                name_bn: "উইক্স ওয়েবসাইট বিল্ডার",
+                image: "https://www.wix.com/wp-content/uploads/2019/07/wix-logo.png",
+                category: "tech",
+                barcode: "729",
+                reason: "ইসরাইলী ওয়েবসাইট বিল্ডার প্ল্যাটফর্ম",
+                reason_en: "Israeli website builder platform",
+                alternative: {
+                    name: "বাংলাদেশী ওয়েব ডেভেলপার",
+                    name_en: "Bangladeshi web developers",
+                    image: "https://www.bangladesh.gov.bd/wp-content/uploads/2019/07/gov-logo.png"
+                }
+            },
+            {
+                name: "Check Point Software",
+                name_bn: "চেক পয়েন্ট সফটওয়্যার",
+                image: "https://www.checkpoint.com/wp-content/uploads/2019/07/checkpoint-logo.png",
+                category: "tech",
+                barcode: "729",
+                reason: "ইসরাইলী সাইবার সিকিউরিটি কোম্পানি",
+                reason_en: "Israeli cybersecurity company",
+                alternative: {
+                    name: "স্থানীয় সাইবার সিকিউরিটি সমাধান",
+                    name_en: "Local cybersecurity solutions",
+                    image: "https://www.bangladesh.gov.bd/wp-content/uploads/2019/07/gov-logo.png"
+                }
+            },
+
+            // Beauty Products
+            {
+                name: "Ahava Dead Sea Products",
+                name_bn: "আহাভা ডেড সি প্রোডাক্টস",
+                image: "https://www.ahava.com/wp-content/uploads/2019/07/ahava-logo.png",
+                category: "beauty",
+                barcode: "729",
+                reason: "অধিকৃত ফিলিস্তিনী ভূমি থেকে উপাদান সংগ্রহ করে",
+                reason_en: "Sources materials from occupied Palestinian land",
+                alternative: {
+                    name: "আরোয়া কসমেটিক্স",
+                    name_en: "Arowa Cosmetics",
+                    image: "https://www.arowa.com/wp-content/uploads/2019/07/arowa-logo.png"
+                }
+            },
+            {
+                name: "Premier Dead Sea Products",
+                name_bn: "প্রিমিয়ার ডেড সি প্রোডাক্টস",
+                image: "https://www.premiercosmetics.com/wp-content/uploads/2019/07/premier-logo.png",
+                category: "beauty",
+                barcode: "729",
+                reason: "অধিকৃত ফিলিস্তিনী ভূমি থেকে উপাদান সংগ্রহ করে",
+                reason_en: "Sources materials from occupied Palestinian land",
+                alternative: {
+                    name: "বসুন্ধরা কসমেটিক্স",
+                    name_en: "Bashundhara Cosmetics",
+                    image: "https://www.bashundhara.com/wp-content/uploads/2019/07/bashundhara-logo.png"
+                }
+            },
+
+            // Other
+            {
+                name: "El Al Airlines",
+                name_bn: "এল আল এয়ারলাইন্স",
+                image: "https://www.elal.com/wp-content/uploads/2019/07/elal-logo.png",
+                category: "other",
+                barcode: "729",
+                reason: "ইসরাইলী জাতীয় বিমান সংস্থা",
+                reason_en: "Israeli national airline",
+                alternative: {
+                    name: "বিমান বাংলাদেশ",
+                    name_en: "Biman Bangladesh",
+                    image: "https://www.biman-airlines.com/wp-content/uploads/2019/07/biman-logo.png"
+                }
+            },
+            {
+                name: "Bank Hapoalim",
+                name_bn: "ব্যাংক হাপোয়ালিম",
+                image: "https://www.bankhapoalim.co.il/wp-content/uploads/2019/07/hapoalim-logo.png",
+                category: "other",
+                barcode: "729",
+                reason: "ইসরাইলী ব্যাংক",
+                reason_en: "Israeli bank",
+                alternative: {
+                    name: "স্থানীয় ব্যাংক",
+                    name_en: "Local banks",
+                    image: "https://www.bangladesh.gov.bd/wp-content/uploads/2019/07/gov-logo.png"
+                }
+            }
+        ];
+
+        // Barcode scanner functionality
+        let scannerActive = false;
+
+        function startScanner() {
+            scannerActive = true;
+            document.getElementById('barcode-result').innerHTML = `
+                <p class="bangla-text"><i class="fas fa-spinner fa-spin"></i> বারকোড স্ক্যান করা হচ্ছে...</p>
+            `;
+
+            Quagga.init({
+                inputStream: {
+                    name: "Live",
+                    type: "LiveStream",
+                    target: document.querySelector('#camera-feed'),
+                    constraints: {
+                        facingMode: "environment"
+                    },
+                },
+                decoder: {
+                    readers: ["ean_reader", "ean_8_reader", "code_128_reader", "upc_reader", "upc_e_reader"]
+                },
+            }, function(err) {
+                if (err) {
+                    document.getElementById('barcode-result').innerHTML = `
+                        <p class="bangla-text" style="color: var(--primary)"><i class="fas fa-exclamation-triangle"></i> স্ক্যানার শুরু করতে সমস্যা: ${err.message}</p>
+                    `;
+                    return;
+                }
+                Quagga.start();
+            });
+
+            Quagga.onDetected(function(result) {
+                if (!scannerActive) return;
+                
+                const code = result.codeResult.code;
+                document.getElementById('barcode-result').innerHTML = `
+                    <p class="bangla-text"><strong>স্ক্যান করা বারকোড:</strong> ${code}</p>
+                `;
+                
+                // Check if Israeli barcode (starts with 729 or 871)
+                if (code.startsWith('729') || code.startsWith('871')) {
+                    // Find product with this barcode
+                    const product = products.find(p => p.barcode && code.startsWith(p.barcode));
+                    
+                    if (product) {
+                        document.getElementById('barcode-result').innerHTML += `
+                            <div style="margin-top: 15px; padding: 15px; background-color: #ffeeee; border-radius: 8px;">
+                                <p class="bangla-text" style="color: var(--secondary); font-weight: bold;">
+                                    <i class="fas fa-exclamation-triangle"></i> এই পণ্যটি ইসরাইলী!
+                                </p>
+                                <p class="bangla-text"><strong>পণ্যের নাম:</strong> ${product.name}</p>
+                                <p class="bangla-text"><strong>বর্জনের কারণ:</strong> ${product.reason}</p>
+                                <p class="bangla-text"><strong>বিকল্প:</strong> ${product.alternative.name}</p>
+                            </div>
+                        `;
+                    } else {
+                        document.getElementById('barcode-result').innerHTML += `
+                            <div style="margin-top: 15px; padding: 15px; background-color: #ffeeee; border-radius: 8px;">
+                                <p class="bangla-text" style="color: var(--secondary); font-weight: bold;">
+                                    <i class="fas fa-exclamation-triangle"></i> সতর্কতা: এই বারকোডটি ইসরাইলী (${code.startsWith('729') ? '729' : '871'} দিয়ে শুরু)
+                                </p>
+                                <p class="bangla-text">আমাদের ডাটাবেসে এই পণ্যটি নেই, তবে এটি ইসরাইলী হতে পারে</p>
+                            </div>
+                        `;
+                    }
+                } else {
+                    document.getElementById('barcode-result').innerHTML += `
+                        <div style="margin-top: 15px; padding: 15px; background-color: #eeffee; border-radius: 8px;">
+                            <p class="bangla-text" style="color: #27ae60; font-weight: bold;">
+                                <i class="fas fa-check-circle"></i> এই পণ্যটি ইসরাইলী নয়
+                            </p>
+                            <p class="bangla-text">বারকোড ${code} ইসরাইলী বারকোড (729 বা 871) দিয়ে শুরু হয়নি</p>
+                        </div>
+                    `;
+                }
+                
+                // Stop after detection
+                stopScanner();
+            });
+        }
+
+        function stopScanner() {
+            if (scannerActive) {
+                Quagga.stop();
+                scannerActive = false;
+            }
+        }
+
+        // Image preview function
+        function previewImage(input, previewId) {
+            const preview = document.getElementById(previewId);
+            const file = input.files[0];
+            
+            if (file) {
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                }
+                
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Display products
+        function renderProducts(filter = 'all') {
+            const container = document.getElementById('boycott-list');
+            const filteredProducts = filter === 'all' 
+                ? products 
+                : products.filter(p => p.category === filter);
+            
+            container.innerHTML = filteredProducts.map(product => `
+                <div class="product-card">
+                    <img src="${product.image}" alt="${product.name}" class="product-image">
+                    <div class="product-content">
+                        <span class="badge">${getCategoryName(product.category)}</span>
+                        ${product.barcode ? `<span class="badge israeli-badge">বারকোড / Barcode: ${product.barcode}</span>` : ''}
+                        <h3>${product.name} / ${product.name_bn}</h3>
+                        <p class="bangla-text"><strong>বর্জনের কারণ / Reason for Boycott:</strong> ${product.reason} / ${product.reason_en}</p>
+                        
+                        <div style="margin-top: 15px; border-top: 1px dashed #eee; padding-top: 15px;">
+                            <span class="badge alternative-badge">বাংলাদেশী বিকল্প / Bangladeshi Alternative</span>
+                            <h4 class="bangla-text">${product.alternative.name} / ${product.alternative.name_en}</h4>
+                            <img src="${product.alternative.image}" alt="${product.alternative.name}" style="max-width: 100%; max-height: 100px; margin-top: 10px;">
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Get Bangla category name
+        function getCategoryName(category) {
+            const categories = {
+                'food': 'খাদ্য ও পানীয় / Food & Beverage',
+                'tech': 'প্রযুক্তি / Technology',
+                'beauty': 'সৌন্দর্য পণ্য / Beauty Products',
+                'fashion': 'ফ্যাশন / Fashion',
+                'health': 'স্বাস্থ্য ও ঔষধ / Health & Medicine',
+                'other': 'অন্যান্য / Other'
+            };
+            return categories[category] || category;
+        }
+
+        // Filter products
+        function filterProducts(category) {
+            // Update active tab
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            renderProducts(category);
+        }
+
+        // Handle form submission
+        document.getElementById('product-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get Israeli product image (either uploaded file or URL)
+            let israeliImage = document.getElementById('israeli-image-url').value;
+            const israeliFile = document.getElementById('israeli-file').files[0];
+            
+            if (israeliFile) {
+                // In a real app, you would upload this to a server
+                israeliImage = URL.createObjectURL(israeliFile);
+            }
+            
+            // Get alternative product image (either uploaded file or URL)
+            let alternativeImage = document.getElementById('alternative-image-url').value;
+            const alternativeFile = document.getElementById('alternative-file').files[0];
+            
+            if (alternativeFile) {
+                // In a real app, you would upload this to a server
+                alternativeImage = URL.createObjectURL(alternativeFile);
+            }
+            
+            const newProduct = {
+                name: document.getElementById('product-name').value,
+                image: israeliImage,
+                category: document.getElementById('product-category').value,
+                barcode: document.getElementById('barcode-number').value,
+                reason: document.getElementById('boycott-reason').value,
+                alternative: {
+                    name: document.getElementById('alternative-name').value,
+                    image: alternativeImage
+                }
+            };
+            
+            products.push(newProduct);
+            renderProducts();
+            
+            // Reset form
+            document.getElementById('product-form').reset();
+            document.getElementById('israeli-preview').style.display = 'none';
+            document.getElementById('alternative-preview').style.display = 'none';
+            
+            // Show success message
+            alert('পণ্য সফলভাবে জমা দেওয়া হয়েছে! প্রকাশনার পূর্বে এটি পর্যালোচনা করা হবে।');
+        });
+
+        // Search functionality
+        document.getElementById('search-input').addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const filtered = products.filter(product => 
+                product.name.toLowerCase().includes(searchTerm) ||
+                (product.alternative.name && product.alternative.name.toLowerCase().includes(searchTerm)) ||
+                product.reason.toLowerCase().includes(searchTerm));
+            
+            const container = document.getElementById('boycott-list');
+            container.innerHTML = filtered.map(product => `
+                <div class="product-card">
+                    <img src="${product.image}" alt="${product.name}" class="product-image">
+                    <div class="product-content">
+                        <span class="badge">${getCategoryName(product.category)}</span>
+                        ${product.barcode ? `<span class="badge israeli-badge">বারকোড / Barcode: ${product.barcode}</span>` : ''}
+                        <h3>${product.name} / ${product.name_bn}</h3>
+                        <p class="bangla-text"><strong>বর্জনের কারণ / Reason for Boycott:</strong> ${product.reason} / ${product.reason_en}</p>
+                        
+                        <div style="margin-top: 15px; border-top: 1px dashed #eee; padding-top: 15px;">
+                            <span class="badge alternative-badge">বাংলাদেশী বিকল্প / Bangladeshi Alternative</span>
+                            <h4 class="bangla-text">${product.alternative.name} / ${product.alternative.name_en}</h4>
+                            <img src="${product.alternative.image}" alt="${product.alternative.name}" style="max-width: 100%; max-height: 100px; margin-top: 10px;">
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        });
+
+        // Initial render
+        renderProducts();
+    </script>
+</body>
+</html>
